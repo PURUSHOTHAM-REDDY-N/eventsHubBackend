@@ -10,7 +10,7 @@ const authRoute=require('./routes/userRoute')
 
 // MIDDLEWARE
 const app=express();
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors());
 
 app.set("trust proxy",1)
 
@@ -27,4 +27,4 @@ mongoose.connect(process.env.URL,{useNewUrlParser:true,useUnifiedTopology:true})
 app.use(cookieParser())
 app.use(express.json());
 
-app.use('/api/auth',authRoute)
+app.use('/api',authRoute)
