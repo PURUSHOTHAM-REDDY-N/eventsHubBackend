@@ -1,4 +1,4 @@
-const express =require('express');
+import express from 'express';
 const {register, login}=require('../controllers/userController');
 const { checkUser } = require('../Middilewares/AuthMiddlewares');
 
@@ -6,8 +6,11 @@ const router =express.Router();
 
 // ROUTES
 
-router.post("/events",checkUser);
+router.post("/auth",checkUser);
 
+router.post('/auth/register',register)
+
+router.post('/auth/login',login)
 
 module.exports=router;
 

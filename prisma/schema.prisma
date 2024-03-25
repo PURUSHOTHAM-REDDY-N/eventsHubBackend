@@ -1,0 +1,36 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = "postgresql://postgres:password@localhost:5432/eventshub"
+}
+
+model User {
+    id             String  @id @default(uuid())
+    username       String  @unique
+    email          String  @unique
+    password       String
+    dob            String?
+    country        String?
+    image          String?
+    created_events Event[]
+}
+
+model Event {
+    event_id            String   @id @default(uuid())
+    creator             User     @relation(fields: [creator_id], references: [id])
+    created_at          DateTime @default(now())
+    updated_at          DateTime @updatedAt
+    creator_id          String
+    title               String
+    description         String
+    start_date          DateTime
+    start_time          DateTime
+    end_time            DateTime
+    event_type          String
+    event_location      String
+    event_loaction_type String
+    image               String?
+}

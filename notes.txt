@@ -1,1 +1,11 @@
+=================================================================================================
+*DataBase*
+
 postgress : https://www.youtube.com/watch?v=DihOP19LQdg
+
+architecture and prisma : https://www.youtube.com/playlist?list=PLIGDNOJWiL1_ygbYCizW9ORMazELD9foK
+
+while querying in command line or pg admin we have to include the column name in double quotes
+because if we didn't do it will convert them to lowercase which we will get realtion not found error
+
+=====================================================================================================
