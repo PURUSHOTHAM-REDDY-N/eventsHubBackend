@@ -1,6 +1,8 @@
 import { Router, Request , Response , NextFunction } from "express";
 import { createUser, getCurrentUser, login } from "../services/auth.service";
 import auth from "../Middilewares/auth.middleware";
+import HttpException from "../utils/http-exception";
+
 
 const router = Router();
 
@@ -13,16 +15,17 @@ router.post("/auth/register",async (req:Request,res:Response,next:NextFunction) 
     }
 })
 
-router.post("/auth/login",async (req:Request,res:Response,next:NextFunction) => {
+router.post("/auth/lOgin",async (req:Request,res:Response,next:NextFunction) => {
     try {
         const user = await login(req.body)
         if(user){
             res.json({user})
         }
         else{
-            throw new Error('User not found');
+            throw new HttpException(404, 'User not found');
         }
     } catch (error) {
+        console.log('Error caught in login route:', error);
         next(error)
     }
 })

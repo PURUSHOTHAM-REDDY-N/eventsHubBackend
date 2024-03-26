@@ -22,15 +22,19 @@ app.get('/',(req:Request,res:Response)=>{
 app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc))
 
 /* eslint-disable */
-app.use((err: Error | HttpException, req: Request, res: Response,next:NextFunction) => {
-    // @ts-ignore
-    if (err && err.errorCode) {
-      // @ts-ignore
-      res.status(err.errorCode).json(err.message);
-    } else if (err) {
-      res.status(500).json(err.message);
-    }
-  });
+app.use((err: Error | HttpException, req: Request, res: Response, next: NextFunction) => {
+  let statusCode = 500; // Default status code for internal server error
+  let errorMessage: string | any = 'Internal Server Error';
+console.log(err)
+  
+  if (err instanceof HttpException) {
+      statusCode = err.errorCode; // If it's an HttpException, set status code from errorCode property
+      errorMessage = err.message; // Set the error message from the HttpException
+  }
+  
+
+  res.status(statusCode).json({ error: errorMessage }); // Sending error message along with status code
+});
   
 //start the server
 app.listen(process.env.PORT || 8000,()=>{
