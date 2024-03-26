@@ -22,7 +22,7 @@ app.get('/',(req:Request,res:Response)=>{
 app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc))
 
 /* eslint-disable */
-app.use((err: Error | HttpException, _req: Request, res: Response) => {
+app.use((err: Error | HttpException, req: Request, res: Response,next:NextFunction) => {
     // @ts-ignore
     if (err && err.errorCode) {
       // @ts-ignore
