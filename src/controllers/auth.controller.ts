@@ -20,7 +20,7 @@ router.post("/auth/login",async (req:Request,res:Response,next:NextFunction) => 
             res.json({user})
         }
         else{
-            throw 'user not fount'
+            throw new Error('User not found');
         }
     } catch (error) {
         next(error)
