@@ -24,7 +24,7 @@ app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc))
 /* eslint-disable */
 app.use((err: Error | HttpException, req: Request, res: Response, next: NextFunction) => {
   let statusCode = 500; // Default status code for internal server error
-  let errorMessage: string | any = 'Internal Server Error';
+  let errorMessage: string | any = 'Internal Server Errors';
 console.log(err)
   
   if (err instanceof HttpException) {
