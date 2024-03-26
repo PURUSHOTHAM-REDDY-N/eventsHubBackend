@@ -16,7 +16,12 @@ router.post("/auth/register",async (req:Request,res:Response,next:NextFunction) 
 router.post("/auth/login",async (req:Request,res:Response,next:NextFunction) => {
     try {
         const user = await login(req.body)
-        res.json({user})
+        if(user){
+            res.json({user})
+        }
+        else{
+            throw 'user not fount'
+        }
     } catch (error) {
         next(error)
     }
