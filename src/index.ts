@@ -25,7 +25,7 @@ app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc))
 app.use((err: Error | HttpException, req: Request, res: Response, next: NextFunction) => {
   let statusCode = 500; // Default status code for internal server error
   let errorMessage: string | any = 'Internal Server Errors';
-console.log(err)
+  console.log(err)
   
   if (err instanceof HttpException) {
       statusCode = err.errorCode; // If it's an HttpException, set status code from errorCode property

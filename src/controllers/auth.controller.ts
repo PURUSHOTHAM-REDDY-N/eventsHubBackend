@@ -26,7 +26,10 @@ router.post("/auth/lOgin",async (req:Request,res:Response,next:NextFunction) => 
         }
     } catch (error) {
         console.log('Error caught in login route:', error);
-        next(error)
+        next({
+            errorCode: error.errorCode,
+            message: error.message,
+        })
     }
 })
 
