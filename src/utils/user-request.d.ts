@@ -7,6 +7,7 @@ declare namespace Express {
       dob?: string;
       image?: string;
       country?: string;
-    };
+    },
+    file?:Multer.File
   }
 }

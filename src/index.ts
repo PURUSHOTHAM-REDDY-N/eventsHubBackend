@@ -13,11 +13,12 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api',routes)
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 app.get('/',(req:Request,res:Response)=>{
     res.json({status:'API is running'})
 })
+app.use('src/public', express.static('public'));
 
 app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc))
 
