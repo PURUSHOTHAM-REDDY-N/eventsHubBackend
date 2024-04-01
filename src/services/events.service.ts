@@ -17,7 +17,7 @@ export const createEvent = async (input: Event) => {
       event_type:input.event_type,
       event_location_type:input.event_location_type,
       event_location:input.event_location,
-      creator_id:input.user?.id,
+      creator_id:input.user.id,
       image:input.image,
     },
     select: {

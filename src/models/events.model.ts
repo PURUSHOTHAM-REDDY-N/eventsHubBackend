@@ -12,6 +12,6 @@ export interface Event {
     event_location:string;
     event_location_type:string;
     image?:string;
-    user?:User
+    user:User
   }
   
