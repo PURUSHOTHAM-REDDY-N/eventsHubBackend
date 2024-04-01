@@ -7,14 +7,10 @@ function auth(req: Request, res: Response, next: NextFunction) {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const currentTime = Math.floor(Date.now() / 1000);
-      if (decoded.exp < currentTime) {
-        // Token has expired, send a 401 Unauthorized response
-        return res.status(401).json({ message: "Token has expired" });
-      }
-      req.user = decoded;
+      console.log(decoded)
+      Object.assign(req.body, { user: decoded });
       next();
-    } catch (error) {
+    } catch (error) {      
       // Token verification failed, send a 401 Unauthorized response
       return res.status(401).json({ message: "Invalid token" });
     }

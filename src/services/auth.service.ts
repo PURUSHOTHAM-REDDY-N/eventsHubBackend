@@ -33,6 +33,7 @@ export const login = async (input: LoginInput) => {
       email:email,
     },
     select: {
+      id:true,
       email: true,
       username: true,
       password: true,
@@ -45,7 +46,7 @@ export const login = async (input: LoginInput) => {
       return {
         email: user.email,
         username: user.username,
-        token: generateToken({username:user.username,email:user.email}),
+        token: generateToken({id:user.id}),
       };
     }
   }

@@ -3,28 +3,58 @@ import bcrypt from "bcrypt";
 import prisma from "../../prisma/prisma-client";
 import generateToken from "../utils/token.utils";
 import { Event } from "../models/events.model";
+import { EventTicket } from "@prisma/client";
 
 export const createEvent = async (input: Event) => {
 
-
-  const user = await prisma.event.create({
+  const event = await prisma.event.create({
     data: {
-      title: input.title.trim(),
-      description:input.description.trim(),
-      end_time:input.end_time,
-      event_loaction_type:input.event_loaction_type.trim(),
+      title: input.title,
+      description:input.description,
       start_date:input.start_date,
       start_time:input.start_time,
-      event_type:input.event_type.trim(),
-      event_location:input.event_location.trim(),
-      creator_id:input.creator_id,
+      end_time:input.end_time,
+      event_type:input.event_type,
+      event_location_type:input.event_location_type,
+      event_location:input.event_location,
+      creator_id:input.user?.id,
       image:input.image,
-    
     },
     select: {
       event_id:true
     },
   });
 
-  return user;
+  return event;
+};
+
+export const createEventTicket = async (input: EventTicket) => {
+
+  const eventTicket = await prisma.eventTicket.create({
+    data: {
+      ticket_name: input.ticket_name,
+      ticket_type: input.ticket_type,
+      ticket_price: input.ticket_price,
+      available_quantity: input.available_quantity,
+      total_quantity: input.total_quantity,
+      event_id: input.event_id
+    },
+    select: {
+      ticket_id:true
+    },
+  }
+  
+  );
+
+  const event = await prisma.event.update({
+    where: {
+    event_id: input.event_id,
+    },
+    data: {
+      event_status:"CREATED"
+    }
+  })
+  console.log(event)
+
+  return eventTicket;
 };
