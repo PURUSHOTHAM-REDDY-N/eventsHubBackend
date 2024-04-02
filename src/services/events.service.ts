@@ -59,7 +59,7 @@ export const createEventTicket = async (input: EventTicket) => {
   return eventTicket;
 };
 
-export const getAllEvents = async (input: string) => {
+export const getAllEventByUserAccount = async (input: string) => {
 
    const events = await prisma.event.findMany({
     where: {
@@ -68,6 +68,15 @@ export const getAllEvents = async (input: string) => {
    })
 
    console.log(events)
+
+
+  return events;
+};
+
+export const getAllEvents = async () => {
+
+   const events = await prisma.event.findMany()
+
 
 
   return events;
