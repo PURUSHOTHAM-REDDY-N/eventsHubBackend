@@ -35,7 +35,7 @@ export const createEventTicket = async (input: EventTicket) => {
       ticket_name: input.ticket_name,
       ticket_type: input.ticket_type,
       ticket_price: input.ticket_price,
-      available_quantity: input.available_quantity,
+      available_quantity: input.total_quantity,
       total_quantity: input.total_quantity,
       event_id: input.event_id
     },
