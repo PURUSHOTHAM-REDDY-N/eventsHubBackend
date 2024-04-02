@@ -3,7 +3,9 @@ import { Request, NextFunction, Response } from "express";
 const jwt = require("jsonwebtoken");
 
 function auth(req: Request, res: Response, next: NextFunction) {
+  console.log("before token extraction",req)
   const token = req.headers.authorization?.split(" ")[1];
+  console.log(token)
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
