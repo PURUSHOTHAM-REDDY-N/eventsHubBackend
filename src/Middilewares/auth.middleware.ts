@@ -9,7 +9,6 @@ function auth(req: Request, res: Response, next: NextFunction) {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log(decoded)
       Object.assign(req.body, { user: decoded });
       next();
     } catch (error) {      

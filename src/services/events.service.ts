@@ -58,3 +58,17 @@ export const createEventTicket = async (input: EventTicket) => {
 
   return eventTicket;
 };
+
+export const getAllEvents = async (input: string) => {
+
+   const events = await prisma.event.findMany({
+    where: {
+      creator_id:input,
+    },
+   })
+
+   console.log(events)
+
+
+  return events;
+};
