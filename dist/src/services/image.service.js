@@ -1,4 +1,3 @@
-"use strict";
 // const fs = require('fs');
 // const path = require('path');
 // import { Router, Request , Response , NextFunction } from "express";
@@ -36,3 +35,4 @@
 //     res.status(500).json({ error: 'Failed to delete image.' });
 //   }
 // };
+//# sourceMappingURL=image.service.js.map

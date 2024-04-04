@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 function auth(req, res, next) {
     var _a;
     console.log("before token extraction", req);
-    var token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
+    const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
     console.log(token);
     if (token) {
         try {
-            var decoded = jwt.verify(token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
             Object.assign(req.body, { user: decoded });
             next();
         }
@@ -22,3 +22,4 @@ function auth(req, res, next) {
     }
 }
 exports.default = auth;
+//# sourceMappingURL=auth.middleware.js.map

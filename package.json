@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "rimraf dist && tsc",
-  "ts.check": "tsc --project tsconfig.json",
-  "add-build": "git add dist",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist",
     "test": "jest -i",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts dev",
     "start": "node dist/src/index.js",
@@ -63,5 +63,5 @@
     "ts.check",
     "build",
     "add-build"
-]
+  ]
 }
