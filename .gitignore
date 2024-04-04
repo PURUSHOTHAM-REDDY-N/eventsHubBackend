@@ -1,5 +1,6 @@
 /node_modules
 .env
+/dist
 secrets.txt
 events_hub_key_pair.pem
 package-lock.json

@@ -1,6 +1,7 @@
 import  express, { NextFunction, Request, Response }  from "express";
 import cors from 'cors';
-// import swaggerUi from 'swagger-ui-express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDoc from '../docs/swagger.json'
 import routes from "./routes/routes";
 import HttpException from "./utils/http-exception";
 require('dotenv').config();
@@ -19,7 +20,7 @@ app.get('/',(req:Request,res:Response)=>{
 })
 app.use('src/public', express.static('public'));
 
-// app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc))
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerDoc))
 
 /* eslint-disable */
 app.use((err: Error | HttpException, req: Request, res: Response, next: NextFunction) => {
