@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 7780769440
+      POSTGRES_USER: postgres
+      POSTGRES_DB: eventshub
+  app:
+    image: my-node-app
+    port:
+      -8080:8080

@@ -4,6 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerDoc from '../docs/swagger.json'
 import routes from "./routes/routes";
 import HttpException from "./utils/http-exception";
+const router = express.Router();
 require('dotenv').config();
 
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api',routes)
+app.use("/.netlify/functions/app", router);
 // app.use(express.static('public'));
 
 app.get('/',(req:Request,res:Response)=>{

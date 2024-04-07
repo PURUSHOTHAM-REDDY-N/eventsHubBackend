@@ -15,7 +15,7 @@ because if we didn't do it will convert them to lowercase which we will get real
 
 1 sudo su --------- to get into root user
 
-2 #curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash ----- intsals the nvm
+2 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash ----- intsals the nvm
 
 3 . ~/.nvm/nvm.sh  -- this   adds the nvm into into the env variables
 
@@ -35,4 +35,8 @@ because if we didn't do it will convert them to lowercase which we will get real
 
 4 nano <file_name>  ---- to open the file for edit and [Ctrl+x to save and exit file]
 
-5 
+------------------------------------------------------------------------------
+
+kill the prooceess if already there
+
+https://superuser.com/questions/1567652/killing-a-node-process-restarts-with-a-new-pid
