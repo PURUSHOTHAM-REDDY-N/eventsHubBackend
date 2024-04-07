@@ -79,7 +79,7 @@ export const getAllEvents = async () => {
   return events;
 };
 
-export const getEventDetailsbyEventId = async (input: string) => {
+export const getEventDetailsbyEventId = async (input: any) => {
 
   const event = await prisma.event.findUnique({
    where: {

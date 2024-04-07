@@ -70,7 +70,7 @@ router.get(
   auth,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const events = await getEventDetailsbyEventId(req.body.event_id);
+      const events = await getEventDetailsbyEventId(req.query.event_id);
       res.json(events);
     } catch (error) {
       next(error);
