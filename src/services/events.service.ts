@@ -76,8 +76,16 @@ export const getAllEventByUserAccount = async (input: string) => {
 export const getAllEvents = async () => {
 
    const events = await prisma.event.findMany()
-
-
-
   return events;
+};
+
+export const getEventDetailsbyEventId = async (input: string) => {
+
+  const event = await prisma.event.findUnique({
+   where: {
+     event_id:input,
+   },
+  })
+
+ return event;
 };
