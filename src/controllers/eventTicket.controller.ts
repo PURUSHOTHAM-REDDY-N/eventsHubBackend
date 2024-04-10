@@ -17,15 +17,15 @@ router.get('/eventTicket/getEventTicketsByEventId',auth, async (req:Request,res:
   }
 )
 
-router.post('/eventTicket/purchaseEventTicketByTicketId',auth, async (req:Request,res:Response,next:NextFunction)=>{
-    try {
-      const eventTickets = await purchaseEventTicketByTicketId(req.query.event_id as string)
-      res.json(eventTickets)
-    } catch (error) {
-      next(error)
-    }
-  }
-)
+// router.post('/eventTicket/purchaseEventTicketByTicketId',auth, async (req:Request,res:Response,next:NextFunction)=>{
+//     try {
+//       const eventTickets = await purchaseEventTicketByTicketId(req.query.event_id as string)
+//       res.json(eventTickets)
+//     } catch (error) {
+//       next(error)
+//     }
+//   }
+// )
 
 
   export default router
