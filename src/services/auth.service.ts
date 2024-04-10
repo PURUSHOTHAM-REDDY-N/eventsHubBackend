@@ -79,6 +79,9 @@ export const getCurrentUser = async (username: string) => {
       where: {
         id:input
       },
+      include:{
+        created_events:true
+      }
     })
 
     return user

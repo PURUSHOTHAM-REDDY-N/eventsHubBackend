@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-    id             String  @id @default(uuid())
-    username       String  @unique
-    email          String  @unique
-    password       String
-    dob            String?
-    country        String?
-    image          String?
-    created_events Event[]
+    id                String             @id @default(uuid())
+    username          String             @unique
+    email             String             @unique
+    password          String
+    dob               String?
+    country           String?
+    image             String?
+    created_events    Event[]
+    PurchasedTickets  PurchasedTickets[]
 }
 
 model Event {
@@ -34,7 +35,7 @@ model Event {
     event_location_type String
     image               String?
     event_tickets       EventTicket[]
-    event_status        String      @default("DRAFT")
+    event_status        String        @default("DRAFT")
 }
 
 model EventTicket {
@@ -43,7 +44,17 @@ model EventTicket {
     ticket_price       String?
     available_quantity String
     total_quantity     String
-    ticket_id    String @id @default(uuid())
-    event              Event  @relation(fields: [event_id], references: [event_id])
+    ticket_id          String  @id @default(uuid())
+    event              Event   @relation(fields: [event_id], references: [event_id])
     event_id           String
+}
+
+model PurchasedTickets {
+    purchase_ticket_id String @id @default(uuid())
+    ticket_name        String
+    ticket_type        String
+    ticket_id          String
+    purchase_quantity  String
+    user               User   @relation(fields: [user_id], references: [id])
+    user_id            String
 }
