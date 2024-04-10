@@ -71,3 +71,16 @@ export const getCurrentUser = async (username: string) => {
     return user
   
   };
+
+
+  export const getAccountDetailsByAccountId = async (input:string)=>{
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id:input
+      },
+    })
+
+    return user
+
+  }

@@ -89,3 +89,4 @@ export const getEventDetailsbyEventId = async (input: any) => {
 
  return event;
 };
+

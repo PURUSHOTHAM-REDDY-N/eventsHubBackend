@@ -1,5 +1,5 @@
 import { Router, Request , Response , NextFunction } from "express";
-import { createUser, getCurrentUser, login } from "../services/auth.service";
+import { createUser, getAccountDetailsByAccountId, getCurrentUser, login } from "../services/auth.service";
 import auth from "../Middilewares/auth.middleware";
 import HttpException from "../utils/http-exception";
 import { error } from "console";
@@ -32,6 +32,15 @@ router.post("/auth/login",async (req:Request,res:Response,next:NextFunction) => 
 router.post("/auth/getCurrentUser",auth,async (req:Request,res:Response,next:NextFunction) => {
     try {
         const user = await getCurrentUser(req.user?.username as string)
+        res.json({user})
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get("/auth/getAccountDetailsByAccountId",auth, async (req:Request,res:Response,next:NextFunction)=>{
+    try {
+        const user = await getAccountDetailsByAccountId(req.body.user.id as string)
         res.json({user})
     } catch (error) {
         next(error)
