@@ -75,7 +75,11 @@ export const getAllEventByUserAccount = async (input: string) => {
 
 export const getAllEvents = async () => {
 
-   const events = await prisma.event.findMany()
+   const events = await prisma.event.findMany({
+    orderBy:{
+      created_at:'desc'
+    }
+   })
   return events;
 };
 

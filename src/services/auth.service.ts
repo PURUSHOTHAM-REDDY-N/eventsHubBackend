@@ -2,6 +2,7 @@ import { LoginInput, RegisterInput } from "../models/auth.model";
 import bcrypt from "bcrypt";
 import prisma from "../../prisma/prisma-client";
 import generateToken from "../utils/token.utils";
+import { User } from "@prisma/client";
 
 export const createUser = async (input: RegisterInput) => {
   const email = input.email;
@@ -12,8 +13,8 @@ export const createUser = async (input: RegisterInput) => {
 
   const user = await prisma.user.create({
     data: {
-      username:username,
-      email:email,
+      username: username,
+      email: email,
       password: hashedPassword,
     },
     select: {
@@ -30,10 +31,10 @@ export const login = async (input: LoginInput) => {
 
   const user = await prisma.user.findUnique({
     where: {
-      email:email,
+      email: email,
     },
     select: {
-      id:true,
+      id: true,
       email: true,
       username: true,
       password: true,
@@ -46,7 +47,7 @@ export const login = async (input: LoginInput) => {
       return {
         email: user.email,
         username: user.username,
-        token: generateToken({id:user.id}),
+        token: generateToken({ id: user.id }),
       };
     }
   }
@@ -54,36 +55,46 @@ export const login = async (input: LoginInput) => {
   return user;
 };
 
-
 export const getCurrentUser = async (username: string) => {
-    
-    const user = await prisma.user.findUnique({
-        where: {
-            username
-        },
-        select: {
-            email: true,
-            username: true,
-        }
+  const user = await prisma.user.findUnique({
+    where: {
+      username,
+    },
+    select: {
+      email: true,
+      username: true,
+    },
+  });
 
-    })
+  return user;
+};
 
-    return user
-  
-  };
+export const getAccountDetailsByAccountId = async (input: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: input,
+    },
+    include: {
+      created_events: true,
+    },
+  });
 
+  return user;
+};
 
-  export const getAccountDetailsByAccountId = async (input:string)=>{
+export const editUserProfile = async (input: User) => {
+  const user = await prisma.user.update({
+    where:{
+      id:input.id
+    },
+    data: {
+      dob: input.dob,
+      country:input.country,
+    },
+    select: {
+      id: true,
+    },
+  });
 
-    const user = await prisma.user.findUnique({
-      where: {
-        id:input
-      },
-      include:{
-        created_events:true
-      }
-    })
-
-    return user
-
-  }
+  return user;
+};
