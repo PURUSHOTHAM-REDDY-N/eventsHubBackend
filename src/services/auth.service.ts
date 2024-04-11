@@ -82,10 +82,10 @@ export const getAccountDetailsByAccountId = async (input: string) => {
   return user;
 };
 
-export const editUserProfile = async (input: User) => {
+export const editUserProfile = async (input: User,id:string) => {
   const user = await prisma.user.update({
     where:{
-      id:input.id
+      id:id
     },
     data: {
       dob: input.dob,

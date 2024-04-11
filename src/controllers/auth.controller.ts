@@ -47,9 +47,10 @@ router.get("/auth/getAccountDetailsByAccountId",auth, async (req:Request,res:Res
     }
 })
 
-router.post('auth/editUserProfile',auth,async (req:Request,res:Response,next:NextFunction)=>{
+router.post('/auth/editUserProfile',auth,async (req:Request,res:Response,next:NextFunction)=>{
+    console.log("hello",req.body.user.id)
     try {
-        const user = await editUserProfile(req.body)
+        const user = await editUserProfile(req.body,req.body.user.id)
         res.json({user})
     } catch (error) {
         next(error)
