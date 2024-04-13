@@ -65,6 +65,9 @@ export const getAllEventByUserAccount = async (input: string) => {
     where: {
       creator_id:input,
     },
+    orderBy:{
+      created_at:'desc'
+    }
    })
 
    console.log(events)
