@@ -5,3 +5,4 @@ secrets.txt
 events_hub_key_pair.pem
 package-lock.json
 .netlify
+aws.config.ts
