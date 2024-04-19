@@ -3,6 +3,8 @@ import { createUser, editUserProfile, getAccountDetailsByAccountId, getCurrentUs
 import auth from "../Middilewares/auth.middleware";
 import HttpException from "../utils/http-exception";
 import { error } from "console";
+import { checkBucket } from "../services/s3.service";
+import { S3 } from "aws-sdk";
 
 
 const router = Router();
@@ -41,6 +43,15 @@ router.post("/auth/getCurrentUser",auth,async (req:Request,res:Response,next:Nex
 router.get("/auth/getAccountDetailsByAccountId",auth, async (req:Request,res:Response,next:NextFunction)=>{
     try {
         const user = await getAccountDetailsByAccountId(req.body.user.id as string)
+        res.json({user})
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get("/auth/s3", async (req:Request,res:Response,next:NextFunction)=>{
+    try {
+        const user = await checkBucket(process.env.BUCKET_NAME as string)
         res.json({user})
     } catch (error) {
         next(error)

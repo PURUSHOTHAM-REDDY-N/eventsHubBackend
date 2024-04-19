@@ -1,17 +1,24 @@
-import multer, { Multer } from 'multer';
-import { Request, NextFunction, Response } from "express";
-const path = require('path');
+import { Request, Response, NextFunction } from "express";
+import multer, { FileFilterCallback } from "multer";
+import path = require("path");
 
-// Storage configuration for Multer
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, "public/images");
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + path.extname(file.originalname));
-    },
-  });
+type FileNameCallback = (error: Error | null, filename: string) => void;
 
-  const upload:Multer = multer({ storage });
+export const multerConfig = {
+  storage: multer.memoryStorage(),
 
-export default upload;
+  fileFilter: (
+    req: Request,
+    file: Express.Multer.File,
+    cb: FileFilterCallback
+  ) => {
+    if (
+      file.mimetype === "image/jpeg" ||
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpg"
+    ) {
+      return cb(null, true); // Allow the file to be uploaded
+    }
+    cb(new Error("Unsupported file type")); // Reject the file
+  },
+};
