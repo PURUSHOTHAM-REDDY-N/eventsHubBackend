@@ -4,6 +4,7 @@ import prisma from "../../prisma/prisma-client";
 import generateToken from "../utils/token.utils";
 import { Event } from "../models/events.model";
 import { EventTicket } from "@prisma/client";
+import  QueryString from "qs";
 
 export const createEvent = async (input: Event) => {
   const event = await prisma.event.create({
@@ -70,10 +71,10 @@ export const getAllEventByUserAccount = async (input: string) => {
   return events;
 };
 
-export const getAllEvents = async (take: string, lastCursor: string) => {
+export const getAllEvents = async (take: string, lastCursor: string ) => {
   const result = await prisma.event.findMany({
     take: take ? parseInt(take as string) : undefined,
-    ...(lastCursor && {
+    ...(lastCursor!=='0' && {
       skip: 1, // Do not include the cursor itself in the query result.
       cursor: {
         event_id: lastCursor,
