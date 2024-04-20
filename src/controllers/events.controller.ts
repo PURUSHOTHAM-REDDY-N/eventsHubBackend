@@ -57,7 +57,7 @@ router.get(
   auth,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const events = await getAllEvents();
+      const events = await getAllEvents(req.query.take as string,req.query.lastCursor as string);
       res.json(events);
     } catch (error) {
       next(error);
