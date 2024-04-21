@@ -32,10 +32,10 @@ export const uploadToS3 = async (fileData?: Express.Multer.File) => {
 
         console.log("File Uploaded with Successfull", res.Location);
 
-        return {success: true, message: "File Uploaded with Successfull", data: res.Location};
+        return {success: true, message: "File Uploaded with Successfull", data: res.Key};
       } catch (error) {
         console.log(error)
-        return {success: false, message: "Unable to Upload the file", data: error};
+        return {success: false, message: "Unable to Upload the file", error: error};
       }
 
   } catch (error) {

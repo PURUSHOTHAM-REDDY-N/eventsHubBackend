@@ -12,9 +12,8 @@ const router = Router();
 
 router.post("/image/upload",upload.single('image'),async (req:Request,res:Response,next:NextFunction) => {
     try {
-        const imageUrl = `${req.file}`;
         const upload = await uploadToS3(req.file)
-        res.json({ imagePath:`${upload.message}` });
+        res.json(upload);
     } catch (error) {
         next(error)
     }
