@@ -46,7 +46,10 @@ export const login = async (input: LoginInput) => {
       return value;
     });
     if (match) {
-      return safeUser;
+      return {
+        ...safeUser,
+        token: generateToken({ id: user.id }),
+      };
     }
   }
 
