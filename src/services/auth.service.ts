@@ -32,23 +32,21 @@ export const login = async (input: LoginInput) => {
   const user = await prisma.user.findUnique({
     where: {
       email: email,
-    },
-    select: {
-      id: true,
-      email: true,
-      username: true,
-      password: true,
-    },
+    }
   });
+
+
 
   if (user) {
     const match = await bcrypt.compare(password, user.password);
+    let safeUser = JSON.parse(JSON.stringify(user), function(key, value) {
+      if (key === "password") {
+        return undefined;
+      }
+      return value;
+    });
     if (match) {
-      return {
-        email: user.email,
-        username: user.username,
-        token: generateToken({ id: user.id }),
-      };
+      return safeUser;
     }
   }
 

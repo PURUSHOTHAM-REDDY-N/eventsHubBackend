@@ -40,3 +40,7 @@ because if we didn't do it will convert them to lowercase which we will get real
 kill the prooceess if already there
 
 https://superuser.com/questions/1567652/killing-a-node-process-restarts-with-a-new-pid
+
+
+increase memory space for node 
+export NODE_OPTIONS="--max-old-space-size=8192"
