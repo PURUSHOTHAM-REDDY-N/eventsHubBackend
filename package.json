@@ -7,7 +7,7 @@
     "build": "tsc",
     "test": "jest -i",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts dev",
-    "start": "tsc && node dist/src/index.js",
+    "start": "tsc && node --max-old-space-size=4096 dist/src/index.js",
     "prisma:migrate": "prisma migrate dev --skip-seed",
     "prisma:format": "prisma format",
     "prisma:generate": "prisma generate",
