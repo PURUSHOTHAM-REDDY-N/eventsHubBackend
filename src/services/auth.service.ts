@@ -90,6 +90,7 @@ export const editUserProfile = async (input: User,id:string) => {
     data: {
       dob: input.dob,
       country:input.country,
+      image:input.image
     },
     select: {
       id: true,
