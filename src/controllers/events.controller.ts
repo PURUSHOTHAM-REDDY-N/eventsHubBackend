@@ -8,6 +8,7 @@ import {
   getAllEvents,
   getAllEventByUserAccount,
   getEventDetailsbyEventId,
+  searchEventsByEventTitle,
 } from "../services/events.service";
 
 const router = Router();
@@ -77,6 +78,15 @@ router.get(
     }
   }
 );
+
+router.get("/events/searchEventsByEventTitle",auth,async (req:Request,res:Response,next:NextFunction)=>{
+  try {
+    const events = await searchEventsByEventTitle(req.query.event_title)
+    res.json(events);
+  } catch (error) {
+    next (error)
+  }
+})
 
 
 export default router;

@@ -142,3 +142,16 @@ export const getEventDetailsbyEventId = async (input: any) => {
 
   return event;
 };
+
+export const searchEventsByEventTitle = async (input:any)=>{
+  const events = await prisma.event.findMany({
+    where:{
+      title:{
+        search:input
+      }
+    }
+    
+  })
+
+  return events;
+}
