@@ -73,11 +73,11 @@ export const getAllEventByUserAccount = async (input: string) => {
 
 export const getAllEvents = async (take: string, lastCursor: string ) => {
   const result = await prisma.event.findMany({
-    where:{
-      start_date:{
-        gte: new Date(),
-      },
-    },
+    // where:{
+    //   start_date:{
+    //     gte: new Date(),
+    //   },
+    // },
     take: take ? parseInt(take as string) : undefined,
     ...(lastCursor!=='0' && {
       skip: 1, // Do not include the cursor itself in the query result.
